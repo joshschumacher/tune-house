@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Counter from './Counter.js';
+import Weather from './Weather.js';
 
 import logo from './logo.svg';
 import './App.css';
@@ -14,6 +15,8 @@ class App extends Component {
         </div>
 
         <Counter name="Frank" counterDefault={42} />
+
+        <Weather city="seattle" state="wa" />
       </div>
     );
   }
