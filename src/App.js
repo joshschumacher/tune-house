@@ -6,11 +6,23 @@ import { BrowserRouter, Match, Miss, Link } from 'react-router';
 import Login from './Login.js';
 import Question from './Question.js';
 import Results from './Results.js';
-
+import firebase from 'firebase';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  componentWillMount() {
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDu9S_nK-LAJaNQ1PiTpMN19m5AOy8qJzw",
+      authDomain: "tune-house.firebaseapp.com",
+      databaseURL: "https://tune-house.firebaseio.com",
+      storageBucket: "tune-house.appspot.com",
+      messagingSenderId: "278304441754"
+    };
+    const app = firebase.initializeApp(config);
+  }
+
   render() {
     return (
       <BrowserRouter>

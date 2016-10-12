@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import firebase from 'firebase';
+import FirebaseWrapper from './FirebaseWrapper';
 
 const STYLE = {
   list: {
@@ -12,50 +14,21 @@ const STYLE = {
 }
 
 class Results extends Component {
+
   render() {
-    const sampleResults = [
-      {
-        question: "Hello?",
-        answers: [
-          {
-            text: "Hi!",
-            result: 22,
-          },
-          {
-            text: "How are you today?",
-            result: 78,
-          },
-        ],
-      },
-      {
-        question: "Chicken or Egg?",
-        answers: [
-          {
-            text: "Chicken",
-            result: 49,
-          },
-          {
-            text: "Egg",
-            result: 51,
-          },
-        ],
-      }
-    ]
 
     return (
       <div>
         <h1>Results</h1>
         <ul style={STYLE.list}>
-          {sampleResults.map((result, index) => {
-            return (
-              <li key={index} style={STYLE.listParentItem}>
-                {result.question}
-                <ul>
-                  {result.answers.map((answer, i) => <li key={i}>{answer.text} ({answer.result}%)</li>)}
-                </ul>
-              </li>
-            );
-          })}
+          {this.props.firebase.questions && this.props.firebase.questions.map((question) => (
+            <li key={question.id}>
+              {question.question}
+              {question.results && Object.keys(question.results).map(key => (
+                <div>{question.results[key]}</div>
+              ))}
+            </li>
+          ))}
         </ul>
 
         <Link to="/">Back to Login</Link>
@@ -64,4 +37,4 @@ class Results extends Component {
   }
 }
 
-export default Results;
+export default FirebaseWrapper(Results);
